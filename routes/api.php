@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -10,3 +11,4 @@ Route::post('login', [AuthController::class, 'login'])->name('login')->middlewar
 Route::post('signup', [AuthController::class, 'signup']);   
 
 Route::apiResource('tickets', TicketController::class)->middleware('auth:sanctum');
+Route::apiResource('responces', ResponseController::class)->middleware('auth:sanctum');
