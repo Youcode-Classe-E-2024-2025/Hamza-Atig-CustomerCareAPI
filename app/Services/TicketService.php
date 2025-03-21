@@ -46,10 +46,8 @@ class TicketService
 
     public function update($ticket, array $data)
     {
-        if ($ticket->user->id === $this->user->id) {
-            return $ticket->update($data);
-        }
-        return response()->json(['message' => 'You can\'t update this ticket'], 403);
+        $ticket->update($data);
+        return response()->json(['message' => 'Ticket updated successfully'], 403);
     }
 
     public function delete($ticket)
