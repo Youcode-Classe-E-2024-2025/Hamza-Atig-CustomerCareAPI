@@ -127,9 +127,167 @@
                     }
                 }
             }
+        },
+        "/responses": {
+            "get": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Get list of responses",
+                "operationId": "ac903e243a828e6b1810d775d37ccc94",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Create a response",
+                "operationId": "649c8109f348331af6f15d31be533b78",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Response created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/responses/{id}": {
+            "get": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Get a response",
+                "operationId": "25c3efc3ac2fb194c26b8bb6a3044ea2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Response not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Update a response",
+                "operationId": "6dec1d4bfc6cc109b8d9b97ea11c0e60",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Response updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Response not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Responses"
+                ],
+                "summary": "Delete a response",
+                "operationId": "230a9d9945940c384d0fd26bc389ec70",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response deleted successfully"
+                    },
+                    "404": {
+                        "description": "Response not found"
+                    }
+                }
+            }
         }
     },
     "tags": [
+        {
+            "name": "Responses",
+            "description": "API Endpoints for Responses"
+        },
         {
             "name": "Auth",
             "description": "Auth"
