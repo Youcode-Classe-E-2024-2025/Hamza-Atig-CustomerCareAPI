@@ -17,7 +17,10 @@ class UserService
 
     public function signup(array $data)
     {
-        return $this->userRepository->create($data);
+        $this->userRepository->create($data);
+        return response()->json([
+            'message' => 'User registered successfully!'
+        ], 201);
     }
 
     public function login(array $data)
@@ -25,10 +28,12 @@ class UserService
         $user = $this->userRepository->where('email', $data['email'])->first();
         
         if ($user && password_verify($data['password'], $user->password)) {
-            return $this->Token($user, 'LoginToken');
+            return response()->json([
+                'token' => $this->Token($user, 'LoginToken')
+            ], 200);
         }
         
-        return json_encode(['error' => 'Invalid credentials']);
+        return response()->json(['error' => 'Invalid credentials'], 401);
     }
 
     public function Token($user, $token)
