@@ -60,3 +60,9 @@ export const deleteTicket = async (ticketId) => {
     headers: getAuthHeader()
   });
 };
+
+export const updateTicket = async (ticketId, data) => {
+  return axios.put(`${API_ENDPOINTS.TICKETS}/${ticketId}`, data, {
+    headers: getAuthHeader()
+  });
+};
