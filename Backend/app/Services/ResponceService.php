@@ -41,7 +41,7 @@ class ResponceService
     public function update($responce, array $data)
     {
         $responce->update($data);
-        return response()->json(['message' => 'Responce updated successfully'], 403);
+        return response()->json(['message' => 'Responce updated successfully'], 200);
     }
 
     public function delete($responce)

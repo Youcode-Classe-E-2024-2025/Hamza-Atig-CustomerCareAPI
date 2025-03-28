@@ -11,7 +11,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('signup', [AuthController::class, 'signup'])->name('signup');   
 
 Route::apiResource('tickets', TicketController::class)->middleware('auth:sanctum');
-Route::apiResource('responces', ResponseController::class)->middleware('auth:sanctum');
+Route::apiResource('responses', ResponseController::class)->middleware('auth:sanctum');
 
 Route::get('me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
