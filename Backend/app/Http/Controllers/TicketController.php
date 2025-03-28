@@ -117,4 +117,26 @@ class TicketController extends Controller
     {
         return $this->ticketService->delete($ticket);
     }
+
+/**
+ * @OA\Get(
+ *     path="/alltickets",
+ *     summary="Get all tickets",
+ *     tags={"Tickets"},
+ *     description="Get all tickets",
+ *     @OA\Response(
+ *         response=200,
+ *         description="successful operation",
+ *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Ticket"))
+ *     ),
+ *     @OA\Response(response=401, description="Unauthorized"),
+ *     @OA\Response(response=404, description="Not Found"),
+ *     security={{"bearerAuth"}}
+ * )
+ */
+public function getAll()
+{
+    return $this->ticketService->getAll();
+}
+
 }
