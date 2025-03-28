@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\response;
 use App\Models\ticket;
 use App\Models\User;
 
@@ -19,11 +20,20 @@ class TicketService
         if (!$this->user) {
             return response()->json(['message' => 'Call to a member function tickets() on null'], 500);
         }
-        $tickets = ticket::where('owner_id', $this->user->id)->get();
+
+        $tickets = Ticket::where('owner_id', $this->user->id)->get();
+
         if ($tickets->count() === 0) {
             return response()->json(['message' => 'You don\'t have any tickets yet, create one first'], 200);
         }
-        return $tickets;
+
+        $tickets->each(function ($ticket) {
+            $ticket->responses = Response::where('ticket_id', $ticket->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        });
+
+        return response()->json($tickets, 200);
     }
 
     public function getAll()
