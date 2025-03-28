@@ -56,7 +56,7 @@ class TicketService
     public function update($ticket, array $data)
     {
         $ticket->update($data);
-        return response()->json(['message' => 'Ticket updated successfully'], 403);
+        return response()->json(['message' => 'Ticket updated successfully'], 200);
     }
 
     public function delete($ticket)

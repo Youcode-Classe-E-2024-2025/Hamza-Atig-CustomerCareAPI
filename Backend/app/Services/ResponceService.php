@@ -20,7 +20,7 @@ class ResponceService
         }
         $responces = response::where('user_id', $this->user->id)->get();
         if ($responces->count() === 0) {
-            return response()->json(['message' => 'You don\'t have any responces yet, create one first'], 404);
+            return response()->json(['message' => 'You don\'t have any responces yet, create one first'], 200);
         }
         return $responces;
     }
