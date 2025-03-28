@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchTickets, createTicket } from '../../api/ticketService';
+import { fetchTickets, createTicket, deleteTicket } from '../../api/ticketService';
 import LogoutButton from '../common/LogoutButton';
 import TicketForm from '../tickets/TicketForm';
 import TicketStatusBadge from '../common/TicketStatusBadge';
@@ -49,7 +49,7 @@ const UserDashboard = ({ userId }) => {
       <LogoutButton />
       <h2 className="text-2xl font-bold text-center text-gray-700">Create a Ticket</h2>
       <TicketForm onSubmit={handleSubmitTicket} />
-      
+
       <h2 className="text-2xl font-bold text-center text-gray-700 mt-8">Your Tickets</h2>
       <div>
         {tickets.length === 0 ? (
@@ -62,6 +62,22 @@ const UserDashboard = ({ userId }) => {
                   <div>
                     <h3 className="text-xl font-bold">{ticket.title}</h3>
                     <p className="text-gray-600">{ticket.description}</p>
+                    {ticket.status !== 'closed' && (
+                      <button
+                        className="mt-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                        onClick={async () => {
+                          try {
+                            await deleteTicket(ticket.id);
+                            const ticketsData = await fetchTickets();
+                            setTickets(ticketsData || []);
+                          } catch (err) {
+                            setError(err.message || 'Failed to delete ticket');
+                          }
+                        }}
+                      >
+                        Delete Ticket
+                      </button>
+                    )}
                   </div>
                   <p className="text-sm text-gray-500">
                     Status: <TicketStatusBadge status={ticket.status} />
@@ -71,8 +87,8 @@ const UserDashboard = ({ userId }) => {
                 {ticket.status === 'closed' && (
                   <div className="mt-4">
                     <h4 className="font-semibold text-gray-700 mb-2">
-                      {ticket.responses?.length > 0 
-                        ? 'Agent Responses:' 
+                      {ticket.responses?.length > 0
+                        ? 'Agent Responses:'
                         : 'No responses yet'}
                     </h4>
                     {ticket.responses?.length > 0 ? (
