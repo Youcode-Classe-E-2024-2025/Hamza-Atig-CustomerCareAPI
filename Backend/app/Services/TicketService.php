@@ -21,7 +21,16 @@ class TicketService
         }
         $tickets = ticket::where('owner_id', $this->user->id)->get();
         if ($tickets->count() === 0) {
-            return response()->json(['message' => 'You don\'t have any tickets yet, create one first'], 404);
+            return response()->json(['message' => 'You don\'t have any tickets yet, create one first'], 200);
+        }
+        return $tickets;
+    }
+
+    public function getAll()
+    {
+        $tickets = ticket::all();
+        if ($tickets->count() === 0) {
+            return response()->json(['message' => 'There are no tickets yet'], 200);
         }
         return $tickets;
     }

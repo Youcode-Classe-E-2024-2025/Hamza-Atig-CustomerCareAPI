@@ -18,6 +18,7 @@ class UserService
     public function signup(array $data)
     {
         $this->userRepository->create($data);
+        
         return response()->json([
             'message' => 'User registered successfully!'
         ], 201);
@@ -44,6 +45,11 @@ class UserService
     public function logout()
     {
         auth()->logout();
+    }
+
+    public function me()
+    {
+        return $this->user;
     }
 }
 
